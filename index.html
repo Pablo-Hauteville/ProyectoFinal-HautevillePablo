@@ -9,18 +9,8 @@
     <title>Document</title>
 </head>
 <body>
-  <ul id="topBar">
- <!--    <button id="boton">Abrir carrito</button>
-
-<div id="modal" class="modal">
-  <div class="modal-content">
-   
-    <span class="close">&times;</span>
-    <h3>Tu carrito</h3>
-    <p>Contenido del Modal...</p>
-  </div> -->
-</div>
-    <img src="./images/carrito.png" alt="img-carrito" class="carrito">
+  <ul>
+    <img src="./images/carrito.png" alt="img-carrito" class="carrito" id="carritoIcon">
     <li id="texto-carrito">Carrito</li>
     <li id="categorias">Categorias</li>
   </ul>
@@ -30,7 +20,23 @@
     <button id="searchButton">Buscar</button>
   </div>
 
-  <div id="ventanaModal" class="modal"></div>
+  <div id="ventanaModal" class="modal">
+    <div class="modal-header">
+      <span class="close">cerrar</span>
+      <h2>Tu carrito de compras</h2>
+    </div>
+    <div class="modal-body">
+      <div class="modal-footer">
+        <h3 id="total">Total $ 0</h3>
+        <a href="" id="finalizar-compra" class="boton-carrito">Finalizar</a>
+        <a href="" id="quitar-producto" class="boton-quitar">Quitar</a>
+      </div>
+
+    </div>
+    
+
+
+  </div>
   <div id="containerProductos" class="container"></div>
  
 

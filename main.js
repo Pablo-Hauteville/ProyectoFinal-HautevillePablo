@@ -121,7 +121,7 @@ const productos = [
 
 const botonBuscar = document.getElementById("searchButton");
 const inputText = document.getElementById("searchInput")
-const carritoIcon = document.getElementsByClassName("carrito")[0];
+const carritoIcon = document.getElementById("carritoIcon")
 const containerProductos = document.getElementById ("containerProductos");
 const modalCarrito = document.getElementById("ventanaModal");
 /* const agregarAlCarrito = document.getElementsByClassName("boton-agregar-carrito"); */
@@ -140,6 +140,8 @@ const respuestaClick = ()=> {
 /* A modo de prueba agregue localStorage a un texto,
  esto solo lo estoy usando para ver si funciona
 ya que tengo el problema con la variable agregarAlCarrito */
+
+ 
 
 textoCarrito.addEventListener("click", () => {
         localStorage.setItem("productos", JSON.stringify(productos));
@@ -219,7 +221,7 @@ function renderizarProductos() {
 renderizarProductos()
  
 
-const mostrarcarritoCompras = () => {
+/* const mostrarcarritoCompras = () => {
     const renderizarCarrito = document.createElement("div");
     renderizarCarrito.classList.add("carritoCard");
     renderizarCarrito.innerHTML = `
@@ -230,7 +232,7 @@ const mostrarcarritoCompras = () => {
     `;
   
     modalCarrito.append(renderizarCarrito);
-  };
+  }; */
   
 
   const boton = document.getElementById('boton');
