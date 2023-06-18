@@ -127,9 +127,7 @@ const modalCarrito = document.getElementById("ventanaModal");
 /* const agregarAlCarrito = document.getElementsByClassName("boton-agregar-carrito"); */
 /* const textoCarrito = document.getElementById("texto-carrito"); */
 const botonAgregarCarrito = document.getElementsByClassName("boton-agregar-carrito");
-
-
-/* let productosCarrito = []; */
+let productosCarrito = [];
 
 
 const respuestaClick = ()=> {
@@ -200,9 +198,62 @@ function buscarProducto(valor) {
 
 function agregarProducto(e) {
     e.preventDefault();
+    if (e.target.classList.contains("boton-agregar-carrito")) {
+        const productoAgregado = e.target.parentElement;
+        /* console.log (productoAgregado); */
+
+        leerDatosProducto(productoAgregado);
+
+    }
     
 }
+
+function leerDatosProducto (producto) {
+    /* console.log(producto); */
+
+    const datosProducto = {
+        id: parseInt(producto.querySelector("a").getAttribute("id")),
+       /*  imagen: producto.querySelector('img').src, */
+        nombre: producto.querySelector("h4").textContent,
+        cantidad: 1,
+        Precio: Number(producto.querySelector("p").textContent.replace("US$", "")),
+        subtotal: 0,
+        total: 0,
+        
+    };
+    
+    datosProducto.subtotal = datosProducto.precio * datosProducto.cantidad;
+    console.log (datosProducto);
+    
+    agregarAlCarrito (datosProducto);
+}
   
+function agregarAlCarrito (productosAgregar)
+
+const existeEnCarrito = productosCarrito.some((producto) => producto.id === productoAgregar.id);
+
+if (existeEnCarrito) {    
+    const productosActualizados = productosCarrito.map((producto) => {
+
+        if (producto.id === productoAgregar.id) {
+            producto.cantidad++;
+            producto.subtotal = producto.precio * producto.cantidad;
+         
+            return producto;
+        } else {
+           
+            return producto;
+        }
+    });
+
+    productosCarrito = productosActualizados; 
+} else {
+    productosCarrito.push(productoAgregar); 
+
+
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
     renderizarProductos();
 
