@@ -125,7 +125,9 @@ const carritoIcon = document.getElementById("carritoIcon")
 const containerProductos = document.getElementById ("containerProductos");
 const modalCarrito = document.getElementById("ventanaModal");
 /* const agregarAlCarrito = document.getElementsByClassName("boton-agregar-carrito"); */
-const textoCarrito = document.getElementById("texto-carrito");
+/* const textoCarrito = document.getElementById("texto-carrito"); */
+const botonAgregarCarrito = document.getElementsByClassName("boton-agregar-carrito");
+
 
 /* let productosCarrito = []; */
 
@@ -143,9 +145,9 @@ ya que tengo el problema con la variable agregarAlCarrito */
 
  
 
-textoCarrito.addEventListener("click", () => {
+/* textoCarrito.addEventListener("click", () => {
         localStorage.setItem("productos", JSON.stringify(productos));
-  });
+  }); */
 
 
 
@@ -196,7 +198,18 @@ function buscarProducto(valor) {
     }
   }
 
+function agregarProducto(e) {
+    e.preventDefault();
+    
+}
   
+document.addEventListener('DOMContentLoaded', () => {
+    renderizarProductos();
+
+    containerProductos.addEventListener('click', agregarProducto);
+    
+});
+
 /* Función renderizarProductos hace aparecer las cards que contiene la información de cada producto */
 
 function renderizarProductos() {
