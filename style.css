@@ -99,7 +99,7 @@ body {
 
  h4 {} */
   
-   /* Agregar estilos Carrito de compras - modal1 */
+   /* Modal del carrito de compras */
    .modal {
     display: none;
     position: fixed;
@@ -121,18 +121,12 @@ body {
     max-width: 600px;
   }
   
-  .close {
-    color: #aaa;
+  .cerrar {
+    color: #000000;
     float: right;
-    font-size: 28px;
+    font-size: 50px;
     font-weight: bold;
     cursor: pointer;
   }
   
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
   

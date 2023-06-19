@@ -121,11 +121,13 @@ const productos = [
 
 const botonBuscar = document.getElementById("searchButton");
 const inputText = document.getElementById("searchInput")
-const carritoIcon = document.getElementById("carritoIcon")
+const carritoIcon = document.getElementsByClassName("carrito")[0];
 const containerProductos = document.getElementById ("containerProductos");
 const modalCarrito = document.getElementById("ventanaModal");
+const modal = document.getElementById('ventanaModal');
 /* const agregarAlCarrito = document.getElementsByClassName("boton-agregar-carrito"); */
 /* const textoCarrito = document.getElementById("texto-carrito"); */
+const botonCerrar = document.getElementById("close");
 const botonAgregarCarrito = document.getElementsByClassName("boton-agregar-carrito");
 let productosCarrito = [];
 
@@ -149,10 +151,9 @@ ya que tengo el problema con la variable agregarAlCarrito */
 
 
 
-carritoIcon.addEventListener("click", () => {
-    mostrarcarritoCompras()
-}
-);
+
+
+
 
 
 botonBuscar.addEventListener("click", () => {
@@ -165,13 +166,7 @@ inputText.addEventListener("click", () => {
     console.log("imput click");
   });
 
-  /* No funciona el evento sin afectar a la función renderizarProductos (-_-) */
-
-/* agregarAlCarrito.addEventListener("click", () => {
-    sessionStorage.setItem("productos", JSON.stringify(productos));
-    
-}); */
-
+  
 
 
 
@@ -213,17 +208,17 @@ function leerDatosProducto (producto) {
 
     const datosProducto = {
         id: parseInt(producto.querySelector("a").getAttribute("id")),
-       /*  imagen: producto.querySelector('img').src, */
+       /*  imagen: producto.querySelector("img").src, */
         nombre: producto.querySelector("h4").textContent,
         cantidad: 1,
-        Precio: Number(producto.querySelector("p").textContent.replace("US$", "")),
+        precio: Number(producto.querySelector("p").textContent.replace("US$", "")),
         subtotal: 0,
-        total: 0,
-        
+                
     };
     
+    
     datosProducto.subtotal = datosProducto.precio * datosProducto.cantidad;
-    console.log (datosProducto);
+    /* console.log (datosProducto); */
     
     agregarAlCarrito (datosProducto);
 }
@@ -242,16 +237,41 @@ function agregarAlCarrito(productoAgregar) {
 
       : productosCarrito.push(productoAgregar);
       console.log (productosCarrito)
+      guardarProductosLocalStorage ();
   }
   
+  /* localStorage - Productos en el carrito */
+   function guardarProductosLocalStorage () {
+    localStorage.setItem("productosLocalStorage", JSON.stringify(productosCarrito)); 
+   }
 
+cargarEventos();
+
+
+function cargarEventos () {
+ 
 document.addEventListener('DOMContentLoaded', () => {
     renderizarProductos();
 
     containerProductos.addEventListener('click', agregarProducto);
     
 });
+carritoIcon.addEventListener("click", ()=> {
+    modal.style.display = "block";
+}
+);
 
+botonCerrar.addEventListener("click", ()=> {
+    modal.style.display = "none";
+});
+
+window.onclick = function (evento) {
+    if (evento.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+}
 /* Función renderizarProductos hace aparecer las cards que contiene la información de cada producto */
 
 function renderizarProductos() {
@@ -290,7 +310,7 @@ renderizarProductos()
   }; */
   
 
-  const boton = document.getElementById('boton');
+/*   const boton = document.getElementById('boton');
   const modal = document.getElementById('modal');
   const closeButton = document.querySelector('.close');
   
@@ -300,7 +320,7 @@ renderizarProductos()
   
   closeButton.addEventListener('click', () => {
     modal.style.display = 'none';
-  });
+  }); */
   
     
     
