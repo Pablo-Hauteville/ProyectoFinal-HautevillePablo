@@ -228,31 +228,22 @@ function leerDatosProducto (producto) {
     agregarAlCarrito (datosProducto);
 }
   
-function agregarAlCarrito (productosAgregar)
+function agregarAlCarrito(productoAgregar) {
+    const existeEnCarrito = productosCarrito.some((producto) => producto.id === productoAgregar.id);
+  
+    existeEnCarrito
+      ? (productosCarrito = productosCarrito.map((producto) =>
+          producto.id === productoAgregar.id
 
-const existeEnCarrito = productosCarrito.some((producto) => producto.id === productoAgregar.id);
+            ? ((producto.cantidad++, producto.subtotal = producto.precio * producto.cantidad), producto)
 
-if (existeEnCarrito) {    
-    const productosActualizados = productosCarrito.map((producto) => {
+            : producto
+        ))
 
-        if (producto.id === productoAgregar.id) {
-            producto.cantidad++;
-            producto.subtotal = producto.precio * producto.cantidad;
-         
-            return producto;
-        } else {
-           
-            return producto;
-        }
-    });
-
-    productosCarrito = productosActualizados; 
-} else {
-    productosCarrito.push(productoAgregar); 
-
-
-}
-
+      : productosCarrito.push(productoAgregar);
+      console.log (productosCarrito)
+  }
+  
 
 document.addEventListener('DOMContentLoaded', () => {
     renderizarProductos();
