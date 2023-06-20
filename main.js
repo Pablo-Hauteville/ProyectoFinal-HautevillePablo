@@ -125,10 +125,10 @@ const carritoIcon = document.getElementsByClassName("carrito")[0];
 const containerProductos = document.getElementById ("containerProductos");
 const modalCarrito = document.getElementById("ventanaModal");
 const modal = document.getElementById('ventanaModal');
-/* const agregarAlCarrito = document.getElementsByClassName("boton-agregar-carrito"); */
-/* const textoCarrito = document.getElementById("texto-carrito"); */
+const contenidoCarrito = document.querySelector(".modal-body");
 const botonCerrar = document.getElementById("close");
 const botonAgregarCarrito = document.getElementsByClassName("boton-agregar-carrito");
+
 let productosCarrito = [];
 
 
@@ -136,24 +136,6 @@ const respuestaClick = ()=> {
     console.log("click")
 }
 /* eventos */
-
-
-
-/* A modo de prueba agregue localStorage a un texto,
- esto solo lo estoy usando para ver si funciona
-ya que tengo el problema con la variable agregarAlCarrito */
-
- 
-
-/* textoCarrito.addEventListener("click", () => {
-        localStorage.setItem("productos", JSON.stringify(productos));
-  }); */
-
-
-
-
-
-
 
 
 botonBuscar.addEventListener("click", () => {
@@ -167,9 +149,6 @@ inputText.addEventListener("click", () => {
   });
 
   
-
-
-
 /* Función buscar producto ejecuta luego del evento del "botonBuscar" */
 
 function buscarProducto(valor) {
@@ -238,7 +217,30 @@ function agregarAlCarrito(productoAgregar) {
       : productosCarrito.push(productoAgregar);
       console.log (productosCarrito)
       guardarProductosLocalStorage ();
+      mostrarProductosCarrito ();
   }
+
+  function mostrarProductosCarrito () {
+    productosCarrito.forEach((producto)=> {
+        const { id, nombre, precio, cantidad, subtotal} = producto;
+
+        const div = document.createElement('div');
+        div.classList.add('contenedor-producto');
+        div.innerHTML = `
+            <a href="#" class="eliminar-producto" id="${id}"> X </a>
+			<P>${nombre}</P>
+            <P>${cantidad}</P>
+			<P>$${precio}</P>			
+			<P>$${subtotal}</P>
+			
+		`;
+
+        contenidoCarrito.appendChild(div);
+
+    });
+  }
+
+  
   
   /* localStorage - Productos en el carrito */
    function guardarProductosLocalStorage () {
