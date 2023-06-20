@@ -1,4 +1,4 @@
-const productos = [
+/* const productos = [
 
     { 
         id: 1,
@@ -117,19 +117,19 @@ const productos = [
         precio: 205,
     }
 ];
-
+ */
 
 const botonBuscar = document.getElementById("searchButton");
 const inputText = document.getElementById("searchInput")
 const carritoIcon = document.getElementsByClassName("carrito")[0];
 const containerProductos = document.getElementById ("containerProductos");
-const modalCarrito = document.getElementById("ventanaModal");
 const totalCarrito = document.getElementById("total");
 const modal = document.getElementById('ventanaModal');
 const contenidoCarrito = document.querySelector(".modal-body");
 const botonCerrar = document.getElementById("close");
 const botonAgregarCarrito = document.getElementsByClassName("boton-agregar-carrito");
-
+const archivoJSON = "./json/productos.json"
+let productos = [];
 let productosCarrito = [];
 
 
@@ -148,6 +148,9 @@ inputText.addEventListener("click", () => {
     /* prueba con console.log */
     console.log("imput click");
   });
+
+
+
 
   
 /* Función buscar producto ejecuta luego del evento del "botonBuscar" */
@@ -230,7 +233,7 @@ function agregarAlCarrito(productoAgregar) {
         const div = document.createElement("div");
         div.classList.add("contenedor-producto");
         div.innerHTML = `
-            <a href="#" class="eliminar-producto" id="${id}"> X </a>
+            <a href="#" class="eliminar-producto" id="${id}">Eliminar</a>
 			<P>${nombre}</P>
             <P>${cantidad}</P>
 			<P>$${precio}</P>			
@@ -269,16 +272,34 @@ function agregarAlCarrito(productoAgregar) {
 
 cargarEventos();
 
+/* Carga los productos desde el archivo productos.json */
+
+function cargarProductos() {
+    fetch(archivoJSON)
+      .then((response) => response.json())
+      .then((datos) => {
+       
+        productos = datos;
+        
+        renderizarProductos();
+      })
+      .catch((error) => {
+        console.log("Error al cargar los productos desde el archivo JSON:", error);
+      });
+  }
+
 
 function cargarEventos () {
  
 document.addEventListener('DOMContentLoaded', () => {
+    cargarProductos();
     renderizarProductos();
     productosCarrito = JSON.parse(localStorage.getItem("productosLocalStorage")) || [];
    /*  console.log (productosCarrito); */
    mostrarProductosCarrito();
-
+   
     containerProductos.addEventListener('click', agregarProducto);
+    contenidoCarrito.addEventListener("click", eliminarProducto);
     
 });
 carritoIcon.addEventListener("click", ()=> {
@@ -297,6 +318,23 @@ window.onclick = function (evento) {
 }
 
 }
+/* funcion elimina los productos dentro del carrito de compras */
+
+function eliminarProducto(e) {
+    e.target.classList.contains("eliminar-producto")
+      ? (productosCarrito = productosCarrito.filter(
+        (producto) => producto.id !== parseInt(e.target.getAttribute("id"))),
+
+
+        guardarProductosLocalStorage(),
+
+        mostrarProductosCarrito())
+        
+      : null;
+  }
+  
+
+
 /* Función renderizarProductos hace aparecer las cards que contiene la información de cada producto */
 
 function renderizarProductos() {
@@ -321,3 +359,4 @@ function renderizarProductos() {
 renderizarProductos()
  
 
+  
