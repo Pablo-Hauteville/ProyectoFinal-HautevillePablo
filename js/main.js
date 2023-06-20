@@ -181,9 +181,20 @@ function agregarProducto(e) {
         /* console.log (productoAgregado); */
 
         leerDatosProducto(productoAgregado);
+        dispararSwalAgregar();
 
     }
     
+}
+
+function dispararSwalAgregar() {
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Producto agregado',
+        showConfirmButton: false,
+        timer: 900
+      })
 }
 
 function leerDatosProducto (producto) {
@@ -191,7 +202,7 @@ function leerDatosProducto (producto) {
 
     const datosProducto = {
         id: parseInt(producto.querySelector("a").getAttribute("id")),
-       /*  imagen: producto.querySelector("img").src, */
+        /* imagen: producto.querySelector("img").src, */
         nombre: producto.querySelector("h4").textContent,
         cantidad: 1,
         precio: Number(producto.querySelector("p").textContent.replace("US$", "")),
@@ -233,11 +244,12 @@ function agregarAlCarrito(productoAgregar) {
         const div = document.createElement("div");
         div.classList.add("contenedor-producto");
         div.innerHTML = `
-            <a href="#" class="eliminar-producto" id="${id}">Eliminar</a>
+            
 			<P>${nombre}</P>
-            <P>${cantidad}</P>
-			<P>$${precio}</P>			
-			<P>$${subtotal}</P>
+            <P>Cantidad: ${cantidad}</P>
+			<P>Precio: US$${precio}</P>			
+			<P>Subtotal: US$${subtotal}</P>
+            <a href="#" class="eliminar-producto" id="${id}">Eliminar</a>
 			
 		`;
 
@@ -325,6 +337,7 @@ function eliminarProducto(e) {
       ? (productosCarrito = productosCarrito.filter(
         (producto) => producto.id !== parseInt(e.target.getAttribute("id"))),
 
+        dispararSwalEliminar(),
 
         guardarProductosLocalStorage(),
 
@@ -333,7 +346,15 @@ function eliminarProducto(e) {
       : null;
   }
   
+function dispararSwalEliminar () {
+    Swal.fire({
+        icon: 'error',
+        title: 'producto eliminado',
+        confirmButtonColor: '#b48a15'
+       
+      })
 
+}
 
 /* Función renderizarProductos hace aparecer las cards que contiene la información de cada producto */
 
