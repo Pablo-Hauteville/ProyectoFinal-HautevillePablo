@@ -227,8 +227,8 @@ function agregarAlCarrito(productoAgregar) {
     productosCarrito.forEach((producto)=> {
         const { id, nombre, precio, cantidad, subtotal} = producto;
 
-        const div = document.createElement('div');
-        div.classList.add('contenedor-producto');
+        const div = document.createElement("div");
+        div.classList.add("contenedor-producto");
         div.innerHTML = `
             <a href="#" class="eliminar-producto" id="${id}"> X </a>
 			<P>${nombre}</P>
@@ -274,6 +274,9 @@ function cargarEventos () {
  
 document.addEventListener('DOMContentLoaded', () => {
     renderizarProductos();
+    productosCarrito = JSON.parse(localStorage.getItem("productosLocalStorage")) || [];
+   /*  console.log (productosCarrito); */
+   mostrarProductosCarrito();
 
     containerProductos.addEventListener('click', agregarProducto);
     
