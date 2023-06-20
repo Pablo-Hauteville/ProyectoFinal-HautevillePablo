@@ -124,6 +124,7 @@ const inputText = document.getElementById("searchInput")
 const carritoIcon = document.getElementsByClassName("carrito")[0];
 const containerProductos = document.getElementById ("containerProductos");
 const modalCarrito = document.getElementById("ventanaModal");
+const totalCarrito = document.getElementById("total");
 const modal = document.getElementById('ventanaModal');
 const contenidoCarrito = document.querySelector(".modal-body");
 const botonCerrar = document.getElementById("close");
@@ -221,6 +222,8 @@ function agregarAlCarrito(productoAgregar) {
   }
 
   function mostrarProductosCarrito () {
+    limpiarHTML();
+
     productosCarrito.forEach((producto)=> {
         const { id, nombre, precio, cantidad, subtotal} = producto;
 
@@ -238,7 +241,24 @@ function agregarAlCarrito(productoAgregar) {
         contenidoCarrito.appendChild(div);
 
     });
+
+    calcularTotal();
+  } 
+
+
+  function calcularTotal () {
+    const total = productosCarrito.reduce ((sumaTotal, producto) => sumaTotal + producto.subtotal, 0);
+     /* console.log (total); */
+    totalCarrito.innerHTML = `Total a pagar: US$ ${total}`;
+    
+
   }
+
+  function limpiarHTML () {
+    while (contenidoCarrito.firstChild) {
+        contenidoCarrito.removeChild(contenidoCarrito.firstChild);
+    }
+  } 
 
   
   
@@ -298,31 +318,3 @@ function renderizarProductos() {
 renderizarProductos()
  
 
-/* const mostrarcarritoCompras = () => {
-    const renderizarCarrito = document.createElement("div");
-    renderizarCarrito.classList.add("carritoCard");
-    renderizarCarrito.innerHTML = `
-      <div id="container-description">
-        <h1>Esto Es una prueba</h1>
-        <p></p>
-        </div>
-    `;
-  
-    modalCarrito.append(renderizarCarrito);
-  }; */
-  
-
-/*   const boton = document.getElementById('boton');
-  const modal = document.getElementById('modal');
-  const closeButton = document.querySelector('.close');
-  
-  boton.addEventListener('click', () => {
-    modal.style.display = 'block';
-  });
-  
-  closeButton.addEventListener('click', () => {
-    modal.style.display = 'none';
-  }); */
-  
-    
-    
