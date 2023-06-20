@@ -15,7 +15,7 @@ body {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-around;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 
 
 }
@@ -33,16 +33,18 @@ padding-top: 10px;
 padding-left: 100px;
 padding-right: 100px;
 margin-right: 5px ;
+border-bottom-right-radius: 50px;
+border-top-left-radius: 50px;
 
 }
 
 
 #carritoIcon {
-  width: auto;
+  width: 100%;
   max-width: 75px;
-  background-color: #000000;
   padding: 10px;
-  border-radius: 5px;
+  background-color: #000000;
+  border-radius: 100%;
 }
 
 
@@ -78,7 +80,7 @@ margin-right: 5px ;
     height: 430px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: end;
+    justify-content: center;
     margin: auto;
 }
   
